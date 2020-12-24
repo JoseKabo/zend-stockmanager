@@ -1,4 +1,4 @@
-# ZendSkeletonApplication
+# ZEND STOCK CONTROL PROJECT
 
 ## Introduction
 
