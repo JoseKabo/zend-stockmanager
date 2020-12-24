@@ -1,0 +1,36 @@
+<div class="row" style="justify-content: space-between;">
+    <h1>
+        <?= $this->titulo; ?>
+    </h1>
+    <button class="btn btn-primary mt-2 mb-2">
+        <i class="fas fa-archive mr-1"></i>
+        Imprimir
+    </button>
+</div>
+
+<table class="table table-bordered table-hover" >
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->listaProductos as $producto): ?>
+        <tr>
+            <td> <?php echo $producto->getId() ?> </td>
+            <td> <?php echo $producto->getNombre() ?> </td>
+            <td> <?php echo $producto->getDescripcion() ?> </td>
+            <td> <?php echo $producto->getCantidad() ?> </td>
+            <td> <?php echo $producto->getPrecio() ?> </td>
+            <td>
+                <a href=" <?php echo $this->basePath()?>/inventario/ver/<?php echo $producto->getId() ?> ">Ver producto</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
