@@ -14,6 +14,16 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     'router' => [
         'routes' => [
+            'login' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/login[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\LoginController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'inventario' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -29,7 +39,7 @@ return [
                 'options' => [
                     'route'    => '/',
                     'defaults' => [
-                        'controller' => Controller\InventarioController::class,
+                        'controller' => Controller\LoginController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -49,7 +59,8 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
-            Controller\InventarioController::class => InvokableFactory::class,
+            Controller\InventarioController::class => Controller\ControllerFactory::class,
+            Controller\LoginController::class => Controller\ControllerFactory::class,
         ],
     ],
     'view_manager' => [

@@ -11,15 +11,4 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
-    public function listarAction()
-    {
-        return [
-            "productos" => [
-                "TV",
-                "Noebook",
-                "Libro"
-            ],
-            "titulo" => "Listar Acción"
-        ];
-    }
 }

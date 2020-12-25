@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
-        <?= $this->headTitle('ZF Skeleton Application')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?= $this->headTitle('Stock Control MIK')->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?= $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -31,23 +31,34 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <a class="navbar-brand" href="<?= $this->url('home') ?>">
-                        <img src="<?= $this->basePath('img/zf-logo-mark.svg') ?>" height="28" alt="Zend Framework <?= \Application\Module::VERSION ?>"/>&nbsp;Skeleton Application
+                        <img src="<?= $this->basePath('img/zf-logo-mark.png') ?>" height="38" width="38" alt="Zend Framework <?= \Application\Module::VERSION ?>"/>&nbsp;Stock Control MIK
                     </a>
                 </div>
+                <?php if ($this->layout()->auth->isLoggedIn()): ?>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?= $this->url('home') ?>">Home <span class="sr-only">(current)</span></a>
+                    <ul class="navbar-nav mr-auto" >
+                        <li class="row nav-item active">
+                            <a class="nav-link mr-1" href="#"> <?= $this->layout()->auth->getIdentity()->correo; ?> </a>
+                            <a class="nav-link" href="<?= $this->url('login', ['action' => 'logout']) ?>"> | Cerrar Sesión <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>
+                <?php else: ?>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="<?= $this->url('login', ['action' => 'index']) ?>"> | Iniciar Sesión <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <?php endif; ?>
             </div>
         </nav>
         <div class="container">
             <?= $this->content ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - <?= date('Y') ?> by Zend Technologies Ltd. All rights reserved.</p>
+                <p>&copy; 2005 - <?= date('Y') ?> by <strong>Tec Devs</strong>. All rights reserved.</p>
             </footer>
         </div>
         <?= $this->inlineScript() ?>

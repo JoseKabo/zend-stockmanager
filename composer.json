@@ -13,7 +13,14 @@
         "php": "^5.6 || ^7.0",
         "zendframework/zend-component-installer": "^1.0 || ^2.1",
         "zendframework/zend-mvc": "^3.1.1",
-        "zfcampus/zf-development-mode": "^3.2"
+        "zfcampus/zf-development-mode": "^3.2",
+        "zendframework/zend-db": "^2.11",
+        "zendframework/zend-form": "^2.14",
+        "zendframework/zend-authentication": "^2.7",
+        "zendframework/zend-mail": "^2.10",
+        "zendframework/zend-mvc-plugin-flashmessenger": "^1.2",
+        "zendframework/zend-inputfilter": "^2.10",
+        "zendframework/zend-mvc-i18n": "^1.1"
     },
     "autoload": {
         "psr-4": {

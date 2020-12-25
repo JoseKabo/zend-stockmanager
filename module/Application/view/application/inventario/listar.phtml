@@ -2,35 +2,42 @@
     <h1>
         <?= $this->titulo; ?>
     </h1>
-    <button class="btn btn-primary mt-2 mb-2">
-        <i class="fas fa-archive mr-1"></i>
-        Imprimir
+    <button class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#modalInsert">
+        <i class="fas fa-plus mr-1"></i>
+        Agregar
     </button>
 </div>
 
-<table class="table table-bordered table-hover" >
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Opciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($this->listaProductos as $producto): ?>
-        <tr>
-            <td> <?php echo $producto->getId() ?> </td>
-            <td> <?php echo $producto->getNombre() ?> </td>
-            <td> <?php echo $producto->getDescripcion() ?> </td>
-            <td> <?php echo $producto->getCantidad() ?> </td>
-            <td> <?php echo $producto->getPrecio() ?> </td>
-            <td>
-                <a href=" <?php echo $this->basePath()?>/inventario/ver/<?php echo $producto->getId() ?> ">Ver producto</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="row" style="justify-content: end; width: 100%; margin-left: 15px;">
+    <button class="btn btn-primary mt-2 mb-2">
+        <i class="fas fa-print mr-1"></i>
+        Imprimir
+    </button>
+
+</div>
+
+<div class="card-columns">
+<?php foreach ($this->productos as $producto): ?>
+  <div class="card" style="max-width: 30vh;">
+    <img src="<?php echo $producto->getUrl_image() ?>" class="card-img-top" >
+    <div class="card-body">
+      <h5 class="card-title"> <?php echo $producto->getNombre() ?> </h5>
+      <p class="card-text"> <?php echo $producto->getDescripcion() ?> </p>
+      <div class="row" style="justify-content: space-between;">
+        <div class="col-5">
+          <p style="text-align: center; margin-bottom: 0; font-weight: 700;" > <?php echo $producto->getCantidad() ?> </p>
+          <small style="text-align: center; margin-top: 0;" > En Stock </small>
+        </div>
+        <div class="col-7">
+          <p style="text-align: center; margin-bottom: 0; font-weight: 700;" > $ <?php echo $producto->getCosto_unit() ?>.00 MXN </p>
+          <small style="text-align: center; margin-top: 0;" > Precio unit. </small>
+        </div>
+      </div>
+      <button type="button" class="btn btn-outline-primary btn-block"  data-toggle="modal" data-target="#modalEditandDelete" >
+        <i class="fas fa-eye mr-1"></i>
+        Ver detalles
+      </button>
+    </div>
+  </div>
+  <?php endforeach; ?>
+</div>

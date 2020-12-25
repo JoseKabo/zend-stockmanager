@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Application\Model\Dao\IProductoDao;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Stdlib\ArrayObject;
 use Application\Model\Entity\Producto;
@@ -9,13 +10,10 @@ use Zend\View\Model\ViewModel;
 
 class InventarioController extends AbstractActionController
 {
-    public $listaProductos = null;
+    public $productoDao = null;
 
-    public function __construct() {
-        $this->listaProductos = new ArrayObject();
-
-        $this->listaProductos->append(new Producto(1,"Chocolate","280 gr.","45","4.00 MXN"));
-        $this->listaProductos->append(new Producto(2,"Paleta Vero","80 gr.","15","5.00 MXN"));
+    public function __construct(IProductoDao $productoDao) {
+        $this->productoDao = $productoDao;
     }
 
     public function indexAction()
@@ -26,7 +24,7 @@ class InventarioController extends AbstractActionController
     {
         return new ViewModel(
             [
-                'listaProductos' => $this->listaProductos,
+                'productos' => $this->productoDao->obtenerProductos($this->layout()->auth->getIdentity()->id_stock),
                 'titulo' => "Stock de tienda"
             ]
         );

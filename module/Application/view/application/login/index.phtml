@@ -1,0 +1,42 @@
+<?php 
+    $this->form->prepare();
+    $this->form->setAttribute('action', $this->url('login', ['action' => 'autenticar']));
+    $this->form->setAttribute('class', 'form-horizontal');
+    $this->form->setAttribute('role', 'form');
+?>
+
+<?php if (!$this->indentity): ?>
+
+    <div class="container-fluid mt-5">
+        <div class="col">
+            <p style="font-size: 25px; font-weight: 700; margin-bottom: 0;">Iniciar Sesión</p>
+            <p style="font-size: 15px; margin-top: 0;">Ingresa tus datos para entrar a tu stock</p>
+        </div>
+    <div class="col mt-5">
+    
+    <?= $this->form()->openTag($this->form) ?>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Correo electronico</label>
+            <?= $this->formInput($this->form->get('correo')) ?>
+        </div>
+        <div class="form-group">
+            <div class="row" style="justify-content: space-between;">
+                <label for="exampleInputPassword1">Contraseña</label>
+                <!-- <a href="#">¿Olvidaste tu contraseña?</a> -->
+            </div>
+            <?= $this->formInput($this->form->get('contrasena')) ?>
+        </div>
+        <div class="form-group">
+            <div class="col">
+                <?= $this->formSubmit($form->get('send')) ?>
+            </div>
+        </div>
+        <hr>
+        <!-- <div class="col mt-3" >
+            <p>¿No tienes una cuenta en stock?</p>
+            <button class="btn btn-secundary btn-block">Unirme ahora</button>
+        </div> -->
+    <?= $this->form()->closeTag() ?>
+    </div>
+</div>
+<?php endif; ?>
