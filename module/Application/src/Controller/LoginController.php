@@ -20,7 +20,7 @@ class LoginController extends AbstractActionController
     public function indexAction()
     {
         return [
-            'titulo' => 'Inicar sesión',
+            'titulo' => 'Iniciar sesión',
             'form' => new LoginForm("login"),
             'identity' => $this->login->getIdentity()
         ];

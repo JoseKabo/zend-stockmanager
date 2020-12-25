@@ -24,7 +24,7 @@ class InventarioController extends AbstractActionController
     {
         return new ViewModel(
             [
-                'productos' => $this->productoDao->obtenerProductos("1"),
+                'productos' => $this->productoDao->obtenerProductos($this->layout()->auth->getIdentity()->id_stock),
                 'titulo' => "Stock de tienda"
             ]
         );

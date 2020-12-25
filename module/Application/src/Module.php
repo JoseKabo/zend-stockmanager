@@ -12,6 +12,7 @@ use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\TableGateway\TableGatewayInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 // Crear y registrar eventos de nuestra app como router 
@@ -19,6 +20,42 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 class Module
 {
     const VERSION = '3.1.3';
+    public function onBootstrap($e)
+    {
+        $eventManager = $e->getApplication()->getEventManager();
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, [
+            $this, 'initAuth'
+        ], 100
+        );
+    }
+    public function initAuth(MvcEvent $e)
+    {
+        $application = $e->getApplication();
+        $serviceManager = $application->getServiceManager();
+        $auth = $serviceManager->get(Login::class);
+
+        $layout = $e->getViewModel();
+        $layout->auth = $auth;
+
+        $matches = $e->getRouteMatch();
+        $controllerName = $matches->getParam('controller');
+        $action = $matches->getParam('action');
+
+        switch ($controllerName) {
+            case Controller\LoginController::class:
+                if(in_array($action, ['index', 'autenticar'])){
+                    return;
+                }
+                break;
+            default:
+                
+                break;
+        }
+        if(!$auth->isLoggedIn()){
+            $matches->setParam('controller', Controller\LoginController::class);
+            $matches->setParam('action', 'index');
+        }
+    }
 
     public function getConfig()
     {

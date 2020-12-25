@@ -34,13 +34,24 @@
                         <img src="<?= $this->basePath('img/zf-logo-mark.png') ?>" height="38" width="38" alt="Zend Framework <?= \Application\Module::VERSION ?>"/>&nbsp;Stock Control MIK
                     </a>
                 </div>
+                <?php if ($this->layout()->auth->isLoggedIn()): ?>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?= $this->url('home') ?>">Home <span class="sr-only">(current)</span></a>
+                    <ul class="navbar-nav mr-auto" >
+                        <li class="row nav-item active">
+                            <a class="nav-link mr-1" href="#"> <?= $this->layout()->auth->getIdentity()->correo; ?> </a>
+                            <a class="nav-link" href="<?= $this->url('login', ['action' => 'logout']) ?>"> | Cerrar Sesión <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>
+                <?php else: ?>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="<?= $this->url('login', ['action' => 'index']) ?>"> | Iniciar Sesión <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <?php endif; ?>
             </div>
         </nav>
         <div class="container">
