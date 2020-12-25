@@ -59,7 +59,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
-            Controller\InventarioController::class => InvokableFactory::class,
+            Controller\InventarioController::class => Controller\ControllerFactory::class,
             Controller\LoginController::class => InvokableFactory::class,
         ],
     ],

@@ -24,7 +24,7 @@ class Module
     {
         return [
             'factories' => [
-                'ProductosTableGateway' => function ($sm){
+                'ProductoTableGateway' => function ($sm){
                     $dbAdapter = $sm->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Producto());

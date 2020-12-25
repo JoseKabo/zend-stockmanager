@@ -20,17 +20,16 @@
         public function eliminarProducto(Producto $producto){
 
         }
-        public function obtenerProductos($id){
+        public function obtenerProductos($id_stock){
             $rowSet = $this->tableGateway->select(
                 [
-                    'id_stock' => (int) $id
+                    'id_stock' => (int) $id_stock
                 ]
             );
-            $row = $rowSet->current;
-            if(!$row){
+            if(!$rowSet){
                 throw new RuntimeException("No hay productos para este stock MIK");
             }
-            return $row;
+            return $rowSet;
         }
     }
     
