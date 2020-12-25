@@ -4,11 +4,15 @@ namespace Application;
 use Application\Model\Dao\IProductoDao;
 use Application\Model\Dao\ProductoDao;
 use Application\Model\Entity\Producto;
+use Application\Model\Login;
+use Application\Model\LoginService;
 use mysqli_result;
+use Zend\Authentication\AuthenticationService;
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\TableGateway\TableGatewayInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 // Crear y registrar eventos de nuestra app como router 
 
@@ -34,8 +38,20 @@ class Module
                     $tableGateway = $sm->get('ProductoTableGateway');
                     $dao = new ProductoDao($tableGateway);
                     return $dao;
-                }
-            ]
+                },
+                AuthenticationService::class => InvokableFactory::class,
+                Login::class => function($sm){
+                    $dbAdapter = $sm->get(AdapterInterface::class);
+                    $authService = $sm->get(AuthenticationService::class);
+                    return new Login($dbAdapter, $authService);
+                },
+                // UsuarioDao::class => function($sm){
+                //     return new UsuarioDao();
+                // }
+            ],
+            'aliases' => [
+                'auth_service' => AuthenticationService::class,
+            ],
         ];
     }
 }

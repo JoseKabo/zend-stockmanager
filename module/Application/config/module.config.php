@@ -17,7 +17,7 @@ return [
             'login' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/login',
+                    'route'    => '/login[/:action]',
                     'defaults' => [
                         'controller' => Controller\LoginController::class,
                         'action'     => 'index',
@@ -60,7 +60,7 @@ return [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
             Controller\InventarioController::class => Controller\ControllerFactory::class,
-            Controller\LoginController::class => InvokableFactory::class,
+            Controller\LoginController::class => Controller\ControllerFactory::class,
         ],
     ],
     'view_manager' => [
